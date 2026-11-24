@@ -99,12 +99,17 @@ public class Program {
             totalAge += person.getAge();
         }
         return totalAge / people.size();*/
-        double averageAge = people.stream()
+        /*double averageAge = people.stream()
                 .mapToInt(person -> person.getAge())
                 .average()
                 .orElse(0.0);
-        return averageAge;
+        return averageAge;*/
 
+        double averageAge = people.stream()
+                .mapToInt(person -> person.getAge())
+                .reduce(0, (total, age ) -> total + age)
+                ;
+        return people.isEmpty() ? 0.0 : averageAge / people.size();
     }
 
 
