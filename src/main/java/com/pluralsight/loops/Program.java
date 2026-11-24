@@ -88,16 +88,26 @@ public class Program {
         return (int) Math.round((double) totalAge / people.size());
     }*/
 
+
+
     // Average = the sum of all ages divided by the number of people.
     // totalAge is a double on purpose: dividing an int by an int would
     // throw the decimals away (305 / 10 would give 30, not 30.5)
     private static double calculateAverageAge(List<Person> people) {
         double totalAge = 0;
-        for (Person person : people) {
+        /*for (Person person : people) {
             totalAge += person.getAge();
         }
-        return totalAge / people.size();
+        return totalAge / people.size();*/
+        double averageAge = people.stream()
+                .mapToInt(person -> person.getAge())
+                .average()
+                .orElse(0.0);
+        return averageAge;
+
     }
+
+
 
     // Keeps the highest age seen so far. maxAge starts at the smallest
     // int there is, so the first person always replaces it
